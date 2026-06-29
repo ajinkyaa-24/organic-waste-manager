@@ -56,6 +56,13 @@ export default function App() {
   };
 
   useEffect(() => {
+    // Check url hash/query directly for recovery redirect to bypass any async event delays
+    const hash = window.location.hash || "";
+    const search = window.location.search || "";
+    if (hash.includes("type=recovery") || search.includes("type=recovery")) {
+      setShowRecoveryModal(true);
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
