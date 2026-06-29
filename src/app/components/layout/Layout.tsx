@@ -148,7 +148,10 @@ export function Layout() {
     <div className={`flex flex-col min-h-[100dvh] h-[100dvh] bg-background relative ${
       isLivePage ? "w-full" : "max-w-md mx-auto"
     }`}>
-      <header className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 py-3 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200">
+      <header 
+        className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 pb-3 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200"
+        style={{ paddingTop: "calc(12px + env(safe-area-inset-top, 0px))" }}
+      >
         <div className="relative flex items-center justify-between w-full">
           {/* Left: Hamburger */}
           <div className="flex items-center">
