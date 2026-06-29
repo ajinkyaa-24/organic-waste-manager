@@ -179,7 +179,7 @@ export function ReportsPage() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success("CSV downloaded successfully!");
+      // CSV downloaded successfully (toast removed)
     } catch (err: any) {
       toast.error(err.message || "Failed to export CSV");
     } finally {
@@ -336,7 +336,7 @@ export function ReportsPage() {
       }
 
       doc.save(`${reportType}_report_${rangeDays}d_${Date.now()}.pdf`);
-      toast.success("PDF downloaded successfully!");
+      // PDF downloaded successfully (toast removed)
     } catch (err: any) {
       toast.error(err.message || "Failed to export PDF");
     } finally {

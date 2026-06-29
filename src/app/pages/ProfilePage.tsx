@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { User, Mail, Award, Edit2, Check, X } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import { toast } from "sonner";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import { AuthContext } from "../App";
 
 export function ProfilePage() {
-  const context = (window as any).__ROUTE_CONTEXT__;
+  const context = useContext(AuthContext);
   const [stats, setStats] = useState({ wasteCount: 0, fertCount: 0, totalKg: 0 });
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -108,7 +109,6 @@ export function ProfilePage() {
       if (profileError) {
         toast.error(`Profile Table Failed: ${profileError.message}`);
       } else {
-        toast.success("Profile updated successfully!");
         setIsEditing(false);
         // Update context trigger
         if ((window as any).__ROUTE_CONTEXT__) {

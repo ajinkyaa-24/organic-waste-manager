@@ -186,7 +186,7 @@ export function History() {
             const entries = logType === "waste" ? wasteEntries : fertilizerEntries;
 
             // Group entries by date
-            const grouped: Record<string, typeof entries> = {};
+            const grouped: Record<string, any[]> = {};
             entries.forEach((entry) => {
               const dateKey = new Date(entry.created_at).toLocaleDateString("en-US", {
                 year: "numeric",

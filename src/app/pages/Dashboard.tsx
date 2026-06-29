@@ -104,7 +104,7 @@ export function Dashboard() {
   const getWeeklyData = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const now = new Date();
-    const chartData = [];
+    const chartData: any[] = [];
 
     for (let i = 6; i >= 0; i--) {
       const d = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);

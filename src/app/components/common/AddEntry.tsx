@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CheckCircle2, Trash2, Sprout } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "../../../lib/supabaseClient";
+import { AuthContext } from "../../App";
 import {
   Select,
   SelectContent,
@@ -22,7 +23,7 @@ export function AddEntry() {
   const [lastEntryText, setLastEntryText] = useState("None");
   const [sources, setSources] = useState<{ id: string; name: string }[]>([]);
 
-  const context = (window as any).__ROUTE_CONTEXT__;
+  const context = useContext(AuthContext);
 
   const fetchStats = async () => {
     try {
@@ -197,14 +198,14 @@ export function AddEntry() {
           {entryType === "waste" && (
             <div className="space-y-1.5">
               <Label htmlFor="mess" className="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">
-                Select Source
+                Collection Source
               </Label>
               <Select value={mess} onValueChange={setMess}>
                 <SelectTrigger
                   id="mess"
                   className="h-10 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"
                 >
-                  <SelectValue placeholder="Choose a source" />
+                  <SelectValue placeholder="Select location..." />
                 </SelectTrigger>
                 <SelectContent>
                   {sources.map((src) => (
@@ -220,13 +221,13 @@ export function AddEntry() {
           {/* Amount Input */}
           <div className="space-y-1.5">
             <Label htmlFor="amount" className="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">
-              {entryType === "waste" ? "Waste Amount (kg)" : "Fertilizer Amount (kg)"}
+              Weight (kg)
             </Label>
             <Input
               id="amount"
               type="number"
               step="0.1"
-              placeholder={entryType === "waste" ? "Enter waste in kg" : "Enter fertilizer in kg"}
+              placeholder="e.g. 15.0"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className="h-10 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"

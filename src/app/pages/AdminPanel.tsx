@@ -266,7 +266,7 @@ export function AdminPanel() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success(`Updated role for ${profile.email} to ${profile.role}`);
+        // Role updated successfully (toast removed)
       }
     } catch (err) {
       console.error(err);
@@ -328,7 +328,7 @@ export function AdminPanel() {
           console.error("Failed to update role:", roleError);
         }
 
-        toast.success(`User ${newUserEmail} registered and assigned role successfully!`);
+        // User registered successfully (toast removed)
         setNewUserEmail("");
         setNewUserPassword("");
         setNewUserName("");
@@ -355,7 +355,7 @@ export function AdminPanel() {
         if (error) {
           toast.error(error.message);
         } else {
-          toast.success("User profile deleted successfully.");
+          // User profile deleted (toast removed)
           fetchProfiles();
         }
       } catch (err) {
@@ -379,7 +379,7 @@ export function AdminPanel() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success("Added waste source successfully!");
+        // Source added (toast removed)
         setNewSourceName("");
         fetchSources();
       }
@@ -404,7 +404,7 @@ export function AdminPanel() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success("Deleted waste source successfully!");
+        // Source deleted (toast removed)
         fetchSources();
       }
     } catch (err) {
@@ -426,7 +426,7 @@ export function AdminPanel() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success("Updated waste source successfully!");
+        // Source updated (toast removed)
         setEditingSourceId(null);
         fetchSources();
       }

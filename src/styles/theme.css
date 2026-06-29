@@ -1,7 +1,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-size: 13.5px;
+  --font-size: 15px;
   --background: #F8FBF9;
   --foreground: #1A1A1A;
   --card: #ffffff;
@@ -39,45 +39,71 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-300: #86efac;
+  --green-400: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #166534;
+  --green-900: #14532d;
+  --green-950: #052e16;
+  --emerald-50: #ecfdf5;
+  --emerald-950: #022c22;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --input-background: oklch(0.25 0 0);
-  --switch-background: oklch(0.3 0 0);
-  --ring: oklch(0.439 0 0);
+  --background: #121212;
+  --foreground: #F5F5F5;
+  --card: #1E1E1E;
+  --card-foreground: #F5F5F5;
+  --popover: #1E1E1E;
+  --popover-foreground: #F5F5F5;
+  --primary: #1E8449;
+  --primary-foreground: #ffffff;
+  --secondary: #2D2D2D;
+  --secondary-foreground: #F5F5F5;
+  --muted: #2D2D2D;
+  --muted-foreground: #A0A0A0;
+  --accent: #1E8449;
+  --accent-foreground: #ffffff;
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: #1E1E1E;
+  --input-background: #242424;
+  --switch-background: #3E3E3E;
+  --ring: #1E8449;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --chart-1: #1E8449;
+  --chart-2: #10B981;
+  --chart-3: #059669;
+  --chart-4: #34D399;
+  --chart-5: #6EE7B7;
+  --sidebar: #181818;
+  --sidebar-foreground: #F5F5F5;
+  --sidebar-primary: #1E8449;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2D2D2D;
+  --sidebar-accent-foreground: #F5F5F5;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #1E8449;
+  --green-50: #062e17;
+  --green-100: #093c1f;
+  --green-200: #0e5029;
+  --green-300: #136633;
+  --green-400: #1e8449;
+  --green-500: #166534;
+  --green-600: #14532d;
+  --green-700: #0c3d1b;
+  --green-800: #092e14;
+  --green-900: #051e0d;
+  --green-950: #020d05;
+  --emerald-50: #032219;
+  --emerald-950: #01140f;
 }
 
 @theme inline {
@@ -119,6 +145,19 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-green-50: var(--green-50);
+  --color-green-100: var(--green-100);
+  --color-green-200: var(--green-200);
+  --color-green-300: var(--green-300);
+  --color-green-400: var(--green-400);
+  --color-green-500: var(--green-500);
+  --color-green-600: var(--green-600);
+  --color-green-700: var(--green-700);
+  --color-green-800: var(--green-800);
+  --color-green-900: var(--green-900);
+  --color-green-950: var(--green-950);
+  --color-emerald-50: var(--emerald-50);
+  --color-emerald-950: var(--emerald-950);
 }
 
 @layer base {

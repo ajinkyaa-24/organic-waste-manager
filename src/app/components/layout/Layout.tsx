@@ -1,7 +1,8 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, PlusCircle, History, Activity, Menu, User, Settings, Bell, FileText, HelpCircle, LogOut, ChevronRight, Shield, Leaf } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { supabase } from "../../../lib/supabaseClient";
+import { AuthContext } from "../../App";
 import {
   Sheet,
   SheetContent,
@@ -21,8 +22,8 @@ export function Layout() {
   const [isOpen, setIsOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
   
-  // Access context from router - will be undefined if not provided
-  const context = (window as any).__ROUTE_CONTEXT__;
+  // Access context reactively from AuthContext
+  const context = useContext(AuthContext);
   
   const isMessUser = context?.role === "mess";
   const isAdminUser = context?.role === "admin";
@@ -130,7 +131,6 @@ export function Layout() {
     if (context?.onLogout) {
       context.onLogout();
     }
-    toast.success("Logged out successfully!");
     setIsOpen(false);
   };
 
@@ -148,7 +148,7 @@ export function Layout() {
     <div className={`flex flex-col min-h-[100dvh] h-[100dvh] bg-background relative ${
       isLivePage ? "w-full" : "max-w-md mx-auto"
     }`}>
-      <header className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 py-1.5 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200">
+      <header className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 py-3 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200">
         <div className="relative flex items-center justify-between w-full">
           {/* Left: Hamburger */}
           <div className="flex items-center">
@@ -242,7 +242,7 @@ export function Layout() {
               <img
                 src="/logo_header.png"
                 onError={() => setLogoError(true)}
-                className="h-9 w-auto max-w-[200px] object-contain mix-blend-multiply dark:mix-blend-normal"
+                className="h-13 w-auto max-w-[240px] object-contain mix-blend-multiply dark:mix-blend-normal dark:brightness-0 dark:invert"
                 alt="Brand Logo"
               />
             ) : (
