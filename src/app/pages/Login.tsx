@@ -89,8 +89,8 @@ export function Login() {
     setIsLoading(true);
     try {
       const redirectUrl = import.meta.env.VITE_APP_URL
-        ? `${import.meta.env.VITE_APP_URL.replace(/\/$/, "")}/`
-        : `${window.location.origin}/`;
+        ? `${import.meta.env.VITE_APP_URL.replace(/\/$/, "")}/reset-password`
+        : `${window.location.origin}/reset-password`;
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: redirectUrl,

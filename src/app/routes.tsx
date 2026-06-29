@@ -9,6 +9,7 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { AboutPage } from "./pages/AboutPage";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
       { path: "reports", Component: ReportsPage },
       { path: "about", Component: AboutPage },
     ],
+  },
+  {
+    path: "/reset-password",
+    Component: ResetPasswordPage,
   },
 ]);

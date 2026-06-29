@@ -3,10 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import { router } from "./routes";
 import { Login } from "./pages/Login";
-import { ResetPassword } from "./pages/ResetPassword";
 import { supabase } from "../lib/supabaseClient";
-import { KeyRound, Lock } from "lucide-react";
-import { toast } from "sonner";
 
 export const AuthContext = createContext<any>(null);
 
@@ -16,12 +13,6 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
-
-  // Recovery modal state
-  const [showRecoveryModal, setShowRecoveryModal] = useState(false);
-  const [recoveryPassword, setRecoveryPassword] = useState("");
-  const [recoveryConfirmPassword, setRecoveryConfirmPassword] = useState("");
-  const [resettingPassword, setResettingPassword] = useState(false);
 
   useEffect(() => {
     const fadeTimer = setTimeout(() => setFadeOut(true), 1700);
@@ -42,7 +33,6 @@ export default function App() {
 
       if (error) {
         console.error("Error fetching user profile:", error);
-        // Do not force log out on profile load error (e.g., table missing, RLS policy, or missing record during recovery)
         setRole("mess");
       } else if (data) {
         setRole(data.role);
@@ -56,14 +46,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Check url hash/query directly for recovery redirect to bypass any async event delays
-    const hash = window.location.hash || "";
-    const search = window.location.search || "";
-    if (hash.includes("type=recovery") || search.includes("type=recovery") || sessionStorage.getItem("isRecovering") === "true") {
-      setShowRecoveryModal(true);
-      sessionStorage.setItem("isRecovering", "true");
-    }
-
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -77,13 +59,6 @@ export default function App() {
     // Listen to changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        if (event === "PASSWORD_RECOVERY") {
-          setSession(session);
-          setShowRecoveryModal(true);
-          setLoading(false);
-          return;
-        }
-
         setSession(session);
         if (session) {
           await fetchUserProfile(session.user.id);
@@ -113,41 +88,6 @@ export default function App() {
     await supabase.auth.signOut();
   };
 
-  const handleRecoverySubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (recoveryPassword.length < 6) {
-      toast.error("Password must be at least 6 characters long");
-      return;
-    }
-    if (recoveryPassword !== recoveryConfirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
-    setResettingPassword(true);
-    try {
-      const { error } = await supabase.auth.updateUser({ password: recoveryPassword });
-      if (error) {
-        toast.error(error.message);
-      } else {
-        setShowRecoveryModal(false);
-        sessionStorage.removeItem("isRecovering");
-        // Clear recovery credentials
-        setRecoveryPassword("");
-        setRecoveryConfirmPassword("");
-        // Load user profile to complete login
-        if (session) {
-          await fetchUserProfile(session.user.id);
-        }
-      }
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Failed to reset password");
-    } finally {
-      setResettingPassword(false);
-    }
-  };
-
   // Store context globally for components to access
   useEffect(() => {
     (window as any).__ROUTE_CONTEXT__ = {
@@ -157,6 +97,8 @@ export default function App() {
       userId: session?.user?.id || null,
     };
   }, [session, role]);
+
+  const isResetPath = window.location.pathname === "/reset-password";
 
   return (
     <AuthContext.Provider value={{ username: session?.user?.email || "", role, onLogout: handleLogout, userId: session?.user?.id || null }}>
@@ -168,19 +110,7 @@ export default function App() {
             <p className="text-gray-500 font-medium">Loading session...</p>
           </div>
         </div>
-      ) : showRecoveryModal ? (
-        <>
-          <ResetPassword
-            recoveryPassword={recoveryPassword}
-            setRecoveryPassword={setRecoveryPassword}
-            recoveryConfirmPassword={recoveryConfirmPassword}
-            setRecoveryConfirmPassword={setRecoveryConfirmPassword}
-            resettingPassword={resettingPassword}
-            onSubmit={handleRecoverySubmit}
-          />
-          <Toaster position="top-center" />
-        </>
-      ) : !session ? (
+      ) : !session && !isResetPath ? (
         <>
           <Login />
           <Toaster position="top-center" />
