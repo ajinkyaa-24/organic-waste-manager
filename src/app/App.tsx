@@ -4,6 +4,8 @@ import { Toaster } from "./components/ui/sonner";
 import { router } from "./routes";
 import { Login } from "./pages/Login";
 import { supabase } from "../lib/supabaseClient";
+import { App as CapApp } from "@capacitor/app";
+import { StatusBar, Style } from "@capacitor/status-bar";
 
 export const AuthContext = createContext<any>(null);
 
@@ -21,6 +23,52 @@ export default function App() {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);
     };
+  }, []);
+
+  // Native Android physical back button handling
+  useEffect(() => {
+    let backButtonListener: any;
+    try {
+      backButtonListener = CapApp.addListener("backButton", ({ canGoBack }) => {
+        if (canGoBack) {
+          window.history.back();
+        } else {
+          CapApp.exitApp();
+        }
+      });
+    } catch (e) {
+      console.warn("Capacitor App plugin not available in web browser:", e);
+    }
+    return () => {
+      if (backButtonListener) {
+        backButtonListener.then((l: any) => l.remove());
+      }
+    };
+  }, []);
+
+  // Dynamically update StatusBar color to blend with light/dark theme changes
+  useEffect(() => {
+    const updateStatusBar = () => {
+      try {
+        const isDark = document.documentElement.classList.contains("dark");
+        StatusBar.setStyle({ style: isDark ? Style.Dark : Style.Light });
+        StatusBar.setBackgroundColor({ color: isDark ? "#121212" : "#F8FBF9" });
+      } catch (e) {
+        // Silent catch for browser environment
+      }
+    };
+
+    // Update once initially
+    updateStatusBar();
+
+    // Listen to theme switches
+    const observer = new MutationObserver(updateStatusBar);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const fetchUserProfile = async (userId: string) => {
@@ -129,17 +177,13 @@ export default function App() {
             fadeOut ? "opacity-0 pointer-events-none scale-105" : "opacity-100"
           }`}
         >
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl flex flex-col items-center gap-5 max-w-[280px] w-full mx-4 border border-white/10 transform transition-all duration-500">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl flex flex-col items-center gap-6 max-w-[280px] w-full mx-4 border border-white/10 transform transition-all duration-500">
             <img
               src="/logo_login.png"
-              className="h-20 w-auto object-contain"
+              className="h-32 w-auto object-contain dark:brightness-0 dark:invert"
               alt="Logo"
             />
-            <div className="flex flex-col items-center gap-1">
-              <h1 className="text-lg font-bold text-gray-800 dark:text-white">BioCycle</h1>
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-semibold tracking-wider uppercase">MIT ADT University</p>
-            </div>
-            <div className="w-6 h-6 border-2 border-[#1E8449] border-t-transparent rounded-full animate-spin mt-2"></div>
+            <div className="w-6 h-6 border-2 border-[#1E8449] dark:border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         </div>
       )}
