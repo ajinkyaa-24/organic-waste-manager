@@ -1,0 +1,9 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Mobile container constraints for overlays */
+[data-slot="sheet-overlay"] {
+  max-width: 448px;
+  margin: 0 auto;
+}

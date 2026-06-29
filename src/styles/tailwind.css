@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Brand green matching BioCycle logo */
+:root {
+  --brand-green: #1E8449;
+  --brand-green-dark: #166534;
+  --brand-green-light: #D1FAE5;
+  --brand-green-mid: #276749;
+}
