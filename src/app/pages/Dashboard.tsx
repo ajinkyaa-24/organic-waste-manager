@@ -165,7 +165,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="p-5 space-y-5">
+    <div className="p-4 space-y-4">
       {/* Category Toggle */}
       <div className="flex gap-2 bg-gray-100 dark:bg-gray-900/50 p-1 rounded-xl shadow-inner">
         <button
@@ -197,12 +197,12 @@ export function Dashboard() {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 gap-4">
             {/* Today's Sum */}
-            <div className="bg-white dark:bg-card rounded-2xl p-5 shadow-md border border-green-100 dark:border-border">
+            <div className="bg-white dark:bg-card rounded-2xl p-4 shadow-sm border border-green-100 dark:border-border">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                   Total {activeType === "waste" ? "Waste" : "Fertilizer"} Today
                 </p>
-                <p className="text-3xl font-semibold text-gray-900 dark:text-white">{todaySum.toFixed(1)} kg</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{todaySum.toFixed(1)} kg</p>
                 <p className="text-sm text-[#1E8449] dark:text-green-400 mt-2 flex items-center gap-1">
                   <TrendingUp className="w-4 h-4" />
                   <span>{getComparison()}</span>
@@ -212,25 +212,25 @@ export function Dashboard() {
 
             {/* Weekly & Monthly Cards */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-2xl p-4 shadow-md border border-green-100 dark:border-border">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-2xl p-3 shadow-sm border border-green-100 dark:border-border">
                 <div className="bg-white/60 dark:bg-card/40 p-2.5 rounded-lg inline-block mb-2">
                   <Calendar className="w-5 h-5 text-[#1E8449]" />
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Weekly Total</p>
-                <p className="text-2xl font-semibold text-gray-900 dark:text-white">{weeklySum.toFixed(1)} kg</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{weeklySum.toFixed(1)} kg</p>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-2xl p-4 shadow-md border border-green-100 dark:border-border">
+              <div className="bg-gradient-to-br from-green-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-2xl p-3 shadow-sm border border-green-100 dark:border-border">
                 <div className="bg-white/60 dark:bg-card/40 p-2.5 rounded-lg inline-block mb-2">
                   <TrendingUp className="w-5 h-5 text-[#1E8449]" />
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Monthly Total</p>
-                <p className="text-2xl font-semibold text-gray-900 dark:text-white">{monthlySum.toFixed(1)} kg</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{monthlySum.toFixed(1)} kg</p>
               </div>
             </div>
           </div>
 
           {/* Combined Chart Card with toggle */}
-          <div className="bg-white dark:bg-card rounded-2xl p-5 shadow-md border border-green-100 dark:border-border">
+          <div className="bg-white dark:bg-card rounded-2xl p-4 shadow-sm border border-green-100 dark:border-border">
             {/* Chart header with toggle */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-gray-900 dark:text-white">

@@ -148,7 +148,7 @@ export function Layout() {
     <div className={`flex flex-col min-h-[100dvh] h-[100dvh] bg-background relative ${
       isLivePage ? "w-full" : "max-w-md mx-auto"
     }`}>
-      <header className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 py-3 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200">
+      <header className="bg-[#ffffff] dark:bg-card text-gray-900 dark:text-white px-4 py-1.5 border-b border-gray-100 dark:border-border shadow-sm transition-colors duration-200">
         <div className="relative flex items-center justify-between w-full">
           {/* Left: Hamburger */}
           <div className="flex items-center">
@@ -242,7 +242,7 @@ export function Layout() {
               <img
                 src="/logo_header.png"
                 onError={() => setLogoError(true)}
-                className="h-16 w-auto max-w-[200px] object-contain mix-blend-multiply dark:mix-blend-normal"
+                className="h-9 w-auto max-w-[200px] object-contain mix-blend-multiply dark:mix-blend-normal"
                 alt="Brand Logo"
               />
             ) : (
@@ -256,7 +256,7 @@ export function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className={`flex-1 min-h-0 ${isLivePage ? "overflow-hidden" : "overflow-y-auto pb-20"}`}>
+      <main className={`flex-1 min-h-0 ${isLivePage ? "overflow-hidden" : "overflow-y-auto pb-16"}`}>
         <div className={isLivePage ? "h-full" : ""}>
           <Outlet />
         </div>
@@ -266,7 +266,7 @@ export function Layout() {
       <nav className={`fixed bottom-0 left-0 right-0 bg-white dark:bg-card border-t border-gray-200 dark:border-border shadow-lg ${
         isLivePage ? "w-full" : "max-w-md mx-auto"
       }`}>
-        <div className="flex justify-around items-center h-16">
+        <div className="flex justify-around items-center h-14">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -280,8 +280,8 @@ export function Layout() {
                     : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                 }`}
               >
-                <Icon className={`w-6 h-6 ${active ? "stroke-[2.5]" : ""}`} />
-                <span className="text-xs mt-1">{item.label}</span>
+                <Icon className={`w-5 h-5 ${active ? "stroke-[2.5]" : ""}`} />
+                <span className="text-[10px] mt-0.5">{item.label}</span>
               </Link>
             );
           })}
@@ -295,8 +295,8 @@ export function Layout() {
                   : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
               }`}
             >
-              <User className={`w-6 h-6 ${isActive("/profile") ? "stroke-[2.5]" : ""}`} />
-              <span className="text-xs mt-1">Profile</span>
+              <User className={`w-5 h-5 ${isActive("/profile") ? "stroke-[2.5]" : ""}`} />
+              <span className="text-[10px] mt-0.5">Profile</span>
             </button>
           )}
         </div>

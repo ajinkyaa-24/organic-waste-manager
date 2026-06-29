@@ -154,16 +154,16 @@ export function AddEntry() {
   };
 
   return (
-    <div className="p-5 min-h-full flex flex-col">
+    <div className="p-4 min-h-full flex flex-col">
       {/* Header Section */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           {entryType === "waste" ? "Add Waste Entry" : "Record Fertilizer Made"}
         </h2>
       </div>
 
       {/* Entry Type Selector */}
-      <div className="flex gap-2 bg-gray-100 dark:bg-gray-900/50 p-1.5 rounded-xl mb-6 shadow-inner">
+      <div className="flex gap-2 bg-gray-100 dark:bg-gray-900/50 p-1.5 rounded-xl mb-4 shadow-inner">
         <button
           type="button"
           onClick={() => {
@@ -191,8 +191,8 @@ export function AddEntry() {
       </div>
 
       {/* Form Card */}
-      <div className="bg-white dark:bg-card rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_15px_-3px_rgba(0,0,0,0.05)] border border-gray-100 dark:border-border">
-        <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="bg-white dark:bg-card rounded-2xl p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_15px_-3px_rgba(0,0,0,0.05)] border border-gray-100 dark:border-border">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Mess Selection (only for waste entries) */}
           {entryType === "waste" && (
             <div className="space-y-1.5">
@@ -202,7 +202,7 @@ export function AddEntry() {
               <Select value={mess} onValueChange={setMess}>
                 <SelectTrigger
                   id="mess"
-                  className="h-11 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"
+                  className="h-10 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"
                 >
                   <SelectValue placeholder="Choose a source" />
                 </SelectTrigger>
@@ -229,7 +229,7 @@ export function AddEntry() {
               placeholder={entryType === "waste" ? "Enter waste in kg" : "Enter fertilizer in kg"}
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="h-11 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"
+              className="h-10 bg-white dark:bg-gray-900/30 border-gray-200 dark:border-border rounded-lg focus:ring-1 focus:ring-[#1E8449] focus:border-[#1E8449] text-sm"
             />
           </div>
 
@@ -237,7 +237,7 @@ export function AddEntry() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-11 bg-[#1E8449] hover:bg-[#166534] text-white rounded-lg text-sm font-semibold shadow-sm transition-colors duration-150 cursor-pointer mt-1"
+            className="w-full h-10 bg-[#1E8449] hover:bg-[#166534] text-white rounded-lg text-sm font-semibold shadow-sm transition-colors duration-150 cursor-pointer mt-1"
           >
             {isSubmitting ? "Submitting..." : "Submit Entry"}
           </Button>
@@ -245,7 +245,7 @@ export function AddEntry() {
       </div>
 
       {/* Quick Stats */}
-      <div className="mt-6 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="bg-white dark:bg-card rounded-xl p-4 shadow-sm border border-gray-100 dark:border-border">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Today's Entries</p>
           <p className="text-2xl font-semibold text-gray-900 dark:text-white">{todayCount}</p>
