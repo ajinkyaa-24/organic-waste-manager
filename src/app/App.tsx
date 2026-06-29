@@ -59,8 +59,9 @@ export default function App() {
     // Check url hash/query directly for recovery redirect to bypass any async event delays
     const hash = window.location.hash || "";
     const search = window.location.search || "";
-    if (hash.includes("type=recovery") || search.includes("type=recovery")) {
+    if (hash.includes("type=recovery") || search.includes("type=recovery") || sessionStorage.getItem("isRecovering") === "true") {
       setShowRecoveryModal(true);
+      sessionStorage.setItem("isRecovering", "true");
     }
 
     // Get initial session
@@ -130,6 +131,7 @@ export default function App() {
         toast.error(error.message);
       } else {
         setShowRecoveryModal(false);
+        sessionStorage.removeItem("isRecovering");
         // Clear recovery credentials
         setRecoveryPassword("");
         setRecoveryConfirmPassword("");
